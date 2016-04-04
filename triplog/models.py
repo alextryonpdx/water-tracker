@@ -16,4 +16,4 @@ class Entry(models.Model):
 		self.save
 
 	def __str__(self):
-		return self.employee.username
+		return self.employee.username, self.date

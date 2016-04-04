@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+
+
+def entries_list(request):
+    return render(request, 'triplog/entries_list.html', {})

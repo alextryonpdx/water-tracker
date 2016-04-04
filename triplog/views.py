@@ -1,7 +1,9 @@
 from django.shortcuts import render
-
+from django.utils import timezone
+from .models import Entry
 
 
 
 def entries_list(request):
-    return render(request, 'triplog/entries_list.html', {})
+	entryList = Entry.objects.all
+	return render(request, 'triplog/entries_list.html', {})

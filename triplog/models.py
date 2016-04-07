@@ -38,6 +38,7 @@ class Entry(models.Model):
 	trip_type = models.CharField(max_length=3,
 								choices=TRIP_TYPE_CHOICES,
 								null=True)
+	leader = models.BooleanField(default=False)
 	rafts = models.IntegerField(null=True)
 	kayaks = models.IntegerField(null=True)
 	waterLevel = models.CharField(max_length=50)
@@ -49,7 +50,7 @@ class Entry(models.Model):
 								null=True)
 	guest_problems = models.TextField(max_length=356,
 								null=True)
-	leader = models.BooleanField(default=False)
+	
 
 
 

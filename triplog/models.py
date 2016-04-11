@@ -3,6 +3,7 @@ from django.utils import timezone
 from django import forms
 from django.forms import CheckboxSelectMultiple
 
+
 # Create your models here.
 class Entry(models.Model):
 	guide = models.ForeignKey('guide')

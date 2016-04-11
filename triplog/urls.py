@@ -8,6 +8,6 @@ urlpatterns = [
     url(r'^guides/$', views.guide_list, name='guide_list'),
     url(r'^guides/(?P<pk>\d+)/$', views.single_guide, name='single_guide'),
     url(r'^trips/(?P<pk>\d+)/$', views.single_trip, name='single_trip'),
-
-    url(r'^guides/new/$', views.guide_new, name='guide_new'),
+	url(r'^guides/new/$', views.guide_new, name='guide_new'),
+    url(r'^guides/(?P<pk>\d+)/(?S<pk>\d+)/(?E<pk>\d+)$', views.guide_new, name='guide_new'),
 ]

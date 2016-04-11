@@ -77,6 +77,7 @@ class Guide(models.Model):
 	FirstName = models.CharField(max_length=64)
 	LastName = models.CharField(max_length=64)
 
+	password = models.CharField(max_length=32)
 	FULL_TIME = 'FT'
 	PART_TIME = 'PT'
 	ON_CALL = 'OC'

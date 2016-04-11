@@ -2,6 +2,8 @@
 
 	{% block content %}
 
+		<p>{{ guide.FirstName }} {{ guide.LastName }}</p>
+
 		{% for entry in entryList %}
 
 			<a href="{% url 'single_trip' pk=entry.pk %}">

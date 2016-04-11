@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django import forms
+from django.forms import CheckboxSelectMultiple
 
 # Create your models here.
 class Entry(models.Model):
@@ -38,7 +39,9 @@ class Entry(models.Model):
 	trip_type = models.CharField(max_length=64,
 							choices=TRIP_TYPE_CHOICES,
 								null=True)
-	leader = models.BooleanField(default=False)
+	leader = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='leader', related_query_name='leader')
+	guides = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='guides', related_query_name='guides')
+
 	rafts = models.IntegerField(null=True, 
 								blank=True)
 	kayaks = models.IntegerField(null=True, 

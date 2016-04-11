@@ -1,0 +1,12 @@
+{% extends 'triplog/base.html' %}
+
+	{% block content %}
+
+		{% for guide in guideList %}
+
+			<a href="{% url 'single_guide' pk=guide.pk %}"><p>{{ guide.FirstName }} {{ guide.LastName }}</p></a>
+
+
+		{% endfor %}
+
+	{% endblock %}

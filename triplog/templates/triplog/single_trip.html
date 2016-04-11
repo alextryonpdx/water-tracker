@@ -1,0 +1,17 @@
+{% extends 'triplog/base.html' %}
+
+	{% block content %}
+
+		<h1>{{ trip }}</h1>
+
+		<h3>{{  trip.date }}</h3>
+
+
+		<p># of Rafts: {{ trip.rafts }}</p>
+		<p># of Kayaks: {{ trip.kayaks }}</p>
+		
+		<p>Trip Leader: <a href="{% url 'single_guide' pk=trip.leader.pk %}">{{ trip.leader }}</a></p>
+
+		<p>Other Guides: {{ trip.guides }}</p>
+
+	{% endblock %}

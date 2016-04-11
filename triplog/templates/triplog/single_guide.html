@@ -1,0 +1,15 @@
+{% extends 'triplog/base.html' %}
+
+	{% block content %}
+
+		{% for entry in entryList %}
+
+			<a href="{% url 'single_trip' pk=entry.pk %}">
+				<p>{{ entry.date }}<br>
+				{{ entry.river }}</p>
+			</a>
+
+
+		{% endfor %}
+
+	{% endblock %}

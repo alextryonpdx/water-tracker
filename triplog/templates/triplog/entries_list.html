@@ -1,24 +1,21 @@
-<html>
+{% extends 'triplog/base.html' %}
 
-	<head>
-		<title>Entries List</title>
-	</head>
+	{% block content %}
 
-	<body>
+		<ul>
 
-		<h1>hello</h1>
+			{% for entry in entryList %}
+			
+				<li>
+					<a href="{% url 'single_guide' pk=entry.guide.pk %}"><p>{{ entry.guide.FirstName }} {{ entry.guide.LastName }}</a></p>
 
-		{% for entry in entryList %}
+					<a href="{% url 'single_trip' pk=entry.pk %}"><p>{{ entry.date }}</p>
 
-			<p>{{ entry.guide.FirstName }} {{ entry.guide.LastName }}<br>
+					<p>{{ entry.river }}</p></a>
+				</li>
 
-			{{ entry.date }}<br>
+			{% endfor %}
 
-			{{ entry.river }}</p>
+		</ul>
 
-
-		{% endfor %}
-
-	</body>
-
-</html>
+	{% endblock %}

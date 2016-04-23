@@ -6,7 +6,7 @@ from django.forms import CheckboxSelectMultiple
 
 # Create your models here.
 class Entry(models.Model):
-	guide = models.ForeignKey('guide')
+	guide = models.ForeignKey('Guide')
 	editDate = models.DateTimeField(
             default=timezone.now)
 	date = models.DateTimeField(

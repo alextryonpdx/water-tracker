@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from . import forms
 from .models import Entry, Guide
-from .forms import GuideForm
+from .forms import GuideForm#, SortDate
 
 
 
@@ -42,3 +43,13 @@ def single_guide_filtered(request, pk, S, E):
 	guide = get_object_or_404(Guide, pk=pk)
 	entryList = Entry.objects.filter(guide=guide, date__gte=startTime, date__lte=endTime)
 	return render(request, 'triplog/single_guide.html', {'entryList': entryList, 'guide': guide })
+
+
+
+def SortView(request):
+	form = forms.SortDate()
+	if request.method == 'POST':
+		form = forms.SortDate(request.POST)
+		if form.is_valid:
+			print('good form')
+	return render(request, 'triplog/sort.html', {'form' : form})

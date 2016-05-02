@@ -6,4 +6,15 @@
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Sort</button>
     </form>
+     <script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+    	changeDay: true,
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "2010:2020",
+      dateFormat: 'yy-mm-dd'
+	    });
+    	  });
+  </script>
 {% endblock %}

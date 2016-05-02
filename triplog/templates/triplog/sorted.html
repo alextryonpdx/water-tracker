@@ -1,0 +1,34 @@
+{% extends 'triplog/base.html' %}
+
+	{% block content %}
+
+		<p>{{ guide.FirstName }} {{ guide.LastName }}</p>
+
+		<table>
+			<tr>
+				<th>GUIDE</th>
+				<th>DATE</th>
+				<th>LEADER</th>
+				<th>RIVER</th>
+				<th>TRIP TYPE</th>
+				<th># OF RAFTS</th>
+				<th># OF KAYAKS</th>
+			</tr>
+
+			{% for entry in entryList %}
+
+				<tr>
+					<td>{{ entry.guide }}</td>
+					<td>{{ entry.date }}</td>
+					<td>{% if entry.guide == entry.leader %} Yes {% endif %}</td>
+					<td>{{ entry.river }}</td>
+					<td>{{ entry.trip_type }}</td>
+					<td>{{ entry.rafts}}</td>
+					<td>{{ entry.kayaks }}</td>
+				</tr>
+
+			{% endfor %}
+
+		</table>
+
+	{% endblock %}

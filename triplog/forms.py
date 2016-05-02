@@ -2,6 +2,7 @@ from django import forms
 from django.db import models
 from django.forms import ModelForm, DateInput, DateField, extras, CheckboxSelectMultiple
 from django.forms.extras.widgets import SelectDateWidget
+from django.contrib.admin.widgets import AdminDateWidget
 
 from .models import Guide, Entry
 
@@ -19,10 +20,17 @@ class EntryForm(forms.ModelForm):
 
 	class Meta:
 		model = Entry
-		fields = ("guide", "date" ,'river' , 'trip_type', 'leader', 'guides', 'rafts', 'kayaks', 'waterLevel', 'weather', 'general_description', 'problems', 'guest_problems')
+		fields = ("guide", "date" ,'river' , 'trip_type', 'leader', 'rafts', 'kayaks', 'waterLevel', 'weather', 'general_description', 'problems', 'guest_problems')
 
 
 
+
+
+class SortDate(forms.Form):
+	start = forms.DateField(input_formats=['%Y-%m-%d','%m/%d/%Y','%m/%d/%y'] , widget=forms.TextInput(attrs={'class':'datepicker'}))
+	end = forms.DateField(input_formats=['%Y-%m-%d','%m/%d/%Y','%m/%d/%y'] , widget=forms.TextInput(attrs={'class':'datepicker'}))
+	# guide field works well but is not needed for payroll. need all guides.
+	# guide = forms.ModelChoiceField(queryset=Guide.objects.all())
 
 
 
@@ -38,30 +46,30 @@ class EntryForm(forms.ModelForm):
 # 	return(choices)
 
 
-# class SortGuides(forms.ModelForm):
+class SortGuides(forms.ModelForm):
 
-# 	class Meta():
-# 		model = Guide
-# 		fields = ['FirstName', 'LastName']
+	class Meta():
+		model = Guide
+		fields = ['FirstName', 'LastName']
 
 
 
-	# class SortDate(forms.Form):
+# class SortDate(forms.Form):
 
-		
-	# 	start = forms.DateTimeField(widget=extras.SelectDateWidget())
-	# 	end = forms.DateTimeField(widget=extras.SelectDateWidget())
+	
+# 	start = DateField(attrs={'class':'datepicker'})
+# 	end = DateField(attrs={'class':'datepicker'})
 
-	# 	guides = Guide.objects.all()
-	# 	ALL = 'All Guides'
-	# 	choices =  [(ALL, 'All Guides'), ]
+	# guides = Guide.objects.all()
+	# ALL = 'All Guides'
+	# choices =  [(ALL, 'All Guides'), ]
 
-	# 	for guide in guides:
-	# 		LastName = guide.LastName
-	# 		choice = (guide.pk, LastName)
-	# 		choices.append(choice)
+	# for guide in guides:
+	# 	LastName = guide.LastName
+	# 	choice = (guide.pk, LastName)
+	# 	choices.append(choice)
 
-	# 	guide = forms.CharField(widget=CheckboxSelectMultiple, choices=choices)
+	# guide = forms.CharField(widget=CheckboxSelectMultiple, choices=choices)
 
 # river = models.CharField(max_length=64,
 # 							choices=River_Choices,

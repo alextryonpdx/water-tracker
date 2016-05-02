@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from . import forms
 from .models import Entry, Guide
-from .forms import GuideForm#, SortDate
+from .forms import GuideForm, EntryForm#, SortDate
 
 
 
@@ -44,12 +44,28 @@ def single_guide_filtered(request, pk, S, E):
 	entryList = Entry.objects.filter(guide=guide, date__gte=startTime, date__lte=endTime)
 	return render(request, 'triplog/single_guide.html', {'entryList': entryList, 'guide': guide })
 
-
+def entry_form(request):
+	if request.method == "POST":
+		form = EntryForm(request.POST)
+		if form.is_valid():
+			entry = form.save(commit=False)
+			entry.save()
+			return redirect('single_trip', pk=entry.pk)
+	else:
+		form = EntryForm()
+		return render(request, 'triplog/entry_form.html', {'form': form})
 
 def SortView(request):
 	form = forms.SortDate()
 	if request.method == 'POST':
 		form = forms.SortDate(request.POST)
 		if form.is_valid:
-			print('good form')
+			start = form.data['start']
+			end = form.data['end']
+			guide = form.data['guide']
+			entryList = Entry.objects.filter(date__gte=start, date__lte=end).order_by('guide')
+			print(guide,entryList)
+			return render(request, 'triplog/sorted.html', {'entryList':entryList, 'guide':guide})
+			# return redirect('sorted_view', S=start,E=end,G=guide)
 	return render(request, 'triplog/sort.html', {'form' : form})
+

@@ -7,9 +7,9 @@ from django.forms import CheckboxSelectMultiple
 # Create your models here.
 class Entry(models.Model):
 	guide = models.ForeignKey('Guide')
-	editDate = models.DateTimeField(
+	editDate = models.DateField(
             default=timezone.now)
-	date = models.DateTimeField(
+	date = models.DateField(
 		blank=True, null=False)
 	WHITE_SALMON_HALF = 'White Salmon Half-Day'
 	WHITE_SALMON_FULL = 'White Salmon Full-Day'
@@ -41,13 +41,13 @@ class Entry(models.Model):
 							choices=TRIP_TYPE_CHOICES,
 								null=True)
 	leader = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='leader', related_query_name='leader')
-	guides = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='guides', related_query_name='guides')
+	# guides = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='guides', related_query_name='guides')
 
 	rafts = models.IntegerField(null=True, 
 								blank=True)
 	kayaks = models.IntegerField(null=True, 
 								blank=True)
-	waterLevel = models.CharField(max_length=50)
+	waterLevel = models.CharField(max_length=50, null=True, blank=True)
 	weather = models.TextField(max_length=356,
 								null=True,
 								blank=True)

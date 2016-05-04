@@ -40,6 +40,8 @@ class Entry(models.Model):
 	trip_type = models.CharField(max_length=64,
 							choices=TRIP_TYPE_CHOICES,
 								null=True)
+
+	# MAKE THIS A BOOLEAN NOT A DROPDOWN. UNUSED INFO, CONVOLUTES THE POINT
 	leader = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='leader', related_query_name='leader')
 	# guides = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='guides', related_query_name='guides')
 
@@ -69,7 +71,11 @@ class Entry(models.Model):
 		self.save
 
 	def __str__(self):
-		return self.river
+		river = self.river
+		guide = self.guide.LastName
+		date = str(self.date)
+		desc = date + ' - ' + guide + ' - ' + river
+		return desc
 
 
 

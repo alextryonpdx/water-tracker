@@ -62,10 +62,12 @@ def SortView(request):
 		if form.is_valid:
 			start = form.data['start']
 			end = form.data['end']
-			guide = form.data['guide']
+			# guide = form.data['guide']
 			entryList = Entry.objects.filter(date__gte=start, date__lte=end).order_by('guide')
-			print(guide,entryList)
-			return render(request, 'triplog/sorted.html', {'entryList':entryList, 'guide':guide})
+			print(entryList)
+			return render(request, 'triplog/sorted.html', {'entryList':entryList, 
+															# 'guide':guide
+															})
 			# return redirect('sorted_view', S=start,E=end,G=guide)
 	return render(request, 'triplog/sort.html', {'form' : form})
 

@@ -18,8 +18,8 @@
 			{% for entry in entryList %}
 
 				<tr>
-					<td>{{ entry.guide }}</td>
-					<td>{{ entry.date }}</td>
+					<td><a href="{% url 'single_guide' pk=entry.guide.pk %}">{{ entry.guide }}</a></td>
+					<td><a href="{% url 'single_trip' pk=entry.pk %}">{{ entry.date }}</a></td>
 					<td>{% if entry.guide == entry.leader %} Yes {% endif %}</td>
 					<td>{{ entry.river }}</td>
 					<td>{{ entry.trip_type }}</td>

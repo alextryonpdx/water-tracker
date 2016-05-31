@@ -6,9 +6,9 @@
 
 		<table>
 			<tr>
-				<th>GUIDE</th>
-				<th>DATE</th>
 				<th>LEADER</th>
+				<th>DATE</th>
+				<th>OTHER GUIDES</th>
 				<th>RIVER</th>
 				<th>TRIP TYPE</th>
 				<th># OF RAFTS</th>
@@ -20,7 +20,13 @@
 				<tr>
 					<td><a href="{% url 'single_guide' pk=entry.guide.pk %}">{{ entry.guide }}</a></td>
 					<td><a href="{% url 'single_trip' pk=entry.pk %}">{{ entry.date }}</a></td>
-					<td>{% if entry.guide == entry.leader %} Yes {% endif %}</td>
+					<td>
+						<ul>
+							{% for guide in  entry.otherGuides.all %}
+								<li><a href="{% url 'single_guide' guide.pk %}">{{ guide }}</a></li>
+							{% endfor %}
+						</ul>
+					</td>
 					<td>{{ entry.river }}</td>
 					<td>{{ entry.trip_type }}</td>
 					<td>{{ entry.rafts}}</td>

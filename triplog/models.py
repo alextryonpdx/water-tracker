@@ -1,16 +1,36 @@
 from django.db import models
 from django.utils import timezone
 from django import forms
-from django.forms import CheckboxSelectMultiple
+from django.forms import CheckboxSelectMultiple, ModelMultipleChoiceField
 
+
+
+class Guide(models.Model):
+	FirstName = models.CharField(max_length=64)
+	LastName = models.CharField(max_length=64)
+
+	password = models.CharField(max_length=32)
+	FULL_TIME = 'FT'
+	PART_TIME = 'PT'
+	ON_CALL = 'OC'
+	EMPLOYMENT_CHOICES = (
+		(FULL_TIME, 'Full Time'),
+		(PART_TIME, 'Part Time'),
+		(ON_CALL, 'On Call')
+	)
+	employee_type = models.CharField(max_length=2,
+									choices=EMPLOYMENT_CHOICES)
+
+	def __str__(self):
+		return self.LastName
 
 # Create your models here.
 class Entry(models.Model):
-	guide = models.ForeignKey('Guide')
+	guide = models.ForeignKey('Guide', related_name="Leader")
 	editDate = models.DateField(
             default=timezone.now)
 	date = models.DateField(
-		blank=True, null=False)
+		blank=True, null=False,)
 	WHITE_SALMON_HALF = 'White Salmon Half-Day'
 	WHITE_SALMON_FULL = 'White Salmon Full-Day'
 	WIND = 'Wind River'
@@ -18,6 +38,7 @@ class Entry(models.Model):
 	HOOD = 'Hood River'
 	FARMLANDS = 'The Farmlands'
 	TIETON = 'Tieton River'
+	KAYAK = 'Kayak Course'
 	River_Choices = (
 		(WHITE_SALMON_HALF, 'White Salmon Half-Day'),
 		(WHITE_SALMON_FULL, 'White Salmon Full-Day'),
@@ -25,25 +46,30 @@ class Entry(models.Model):
 		(KLICKITAT, 'Klickitat River'),
 		(HOOD, 'Hood River'),
 		(FARMLANDS, 'The Farmlands'),
-		(TIETON, 'Tieton River')
+		(TIETON, 'Tieton River'),
+		(KAYAK, 'Kayak Course')
 	)
 	river = models.CharField(max_length=64,
 							choices=River_Choices,
 							null=True)
 
-	KAYAK = 'Kayak'
-	RAFT = 'Raft'
-	TRIP_TYPE_CHOICES = (
-		(KAYAK, 'Kayak'),
-		(RAFT, 'Raft')
-	)
-	trip_type = models.CharField(max_length=64,
-							choices=TRIP_TYPE_CHOICES,
-								null=True)
+	# KAYAK = 'Kayak'
+	# RAFT = 'Raft'
+	# TRIP_TYPE_CHOICES = (
+	# 	(KAYAK, 'Kayak'),
+	# 	(RAFT, 'Raft')
+	# )
+	# trip_type = models.CharField(max_length=64,
+	# 						choices=TRIP_TYPE_CHOICES,
+	# 							null=True)
 
 	# MAKE THIS A BOOLEAN NOT A DROPDOWN. UNUSED INFO, CONVOLUTES THE POINT
-	leader = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='leader', related_query_name='leader')
+	tripLeader = models.BooleanField(default=False, verbose_name='Are you the trip leader?')
+	# leader = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='leader', related_query_name='leader')
 	# guides = models.ForeignKey('guide', unique=False, null=True, blank=True, related_name='guides', related_query_name='guides')
+
+	#otherGuides = forms.ModelMultipleChoiceField(queryset=models.Guide)
+	otherGuides = models.ManyToManyField(Guide, null=True, blank=True)
 
 	rafts = models.IntegerField(null=True, 
 								blank=True)
@@ -73,32 +99,9 @@ class Entry(models.Model):
 	def __str__(self):
 		river = self.river
 		guide = self.guide.LastName
-		date = str(self.date)
-		desc = date + ' - ' + guide + ' - ' + river
+		date = self.date
+		desc = str(date) + ' - ' + guide + ' - ' + river
 		return desc
-
-
-
-class Guide(models.Model):
-	FirstName = models.CharField(max_length=64)
-	LastName = models.CharField(max_length=64)
-
-	password = models.CharField(max_length=32)
-	FULL_TIME = 'FT'
-	PART_TIME = 'PT'
-	ON_CALL = 'OC'
-	EMPLOYMENT_CHOICES = (
-		(FULL_TIME, 'Full Time'),
-		(PART_TIME, 'Part Time'),
-		(ON_CALL, 'On Call')
-	)
-	employee_type = models.CharField(max_length=2,
-									choices=EMPLOYMENT_CHOICES)
-
-	def __str__(self):
-		return self.LastName
-
-
 
 
 

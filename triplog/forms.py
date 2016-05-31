@@ -17,10 +17,10 @@ class GuideForm(forms.ModelForm):
 
 
 class EntryForm(forms.ModelForm):
-
+	
 	class Meta:
 		model = Entry
-		fields = ("guide", "date" ,'river' , 'trip_type', 'leader', 'rafts', 'kayaks', 'waterLevel', 'weather', 'general_description', 'problems', 'guest_problems')
+		fields = ("guide", "date" ,'river' , 'tripLeader', 'otherGuides', 'rafts', 'kayaks', 'waterLevel', 'weather', 'general_description', 'problems', 'guest_problems')
 
 
 

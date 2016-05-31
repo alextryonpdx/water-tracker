@@ -13,7 +13,13 @@
 	<body>
 		<div class="container-fluid">
 
-			<a href="{% url 'guide_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+			<a href="{% url 'guide_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> New Guide</a>
+			<br>
+			<a href="{% url 'entry_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> New Trip</a>
+			<br>
+			<a href="{% url 'sort_view' %}" class="top-menu"><span class="glyphicon glyphicon-list-alt"></span> Sort Trips</a>
+			<br>
+			<a href="{% url 'guide_list' %}" class="top-menu"><span class="glyphicon glyphicon-list-alt"></span> View Guides List</a>
 
 			<div class="row">
 				<div class="col-md-2"></div>

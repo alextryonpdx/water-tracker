@@ -4,14 +4,26 @@
 
 		<h1>{{ trip }}</h1>
 
-		<h3>{{  trip.date }}</h3>
+		<h3>{{ trip.date }}</h3>
 
 
 		<p># of Rafts: {{ trip.rafts }}</p>
 		<p># of Kayaks: {{ trip.kayaks }}</p>
 		
-		<p>Trip Leader: <a href="{% url 'single_guide' pk=trip.leader.pk %}">{{ trip.leader }}</a></p>
+		<p>Trip Leader: <a href="{% url 'single_guide' pk=trip.guide.pk %}">{{ trip.guide }}</a></p>
 
-		<p>Other Guides: {{ trip.guides }}</p>
+		<p>Other Guides:</p>
+		<ul>
+			{% for guide in  trip.otherGuides.all %}
+				<li><a href="{% url 'single_guide' guide.pk %}">{{ guide }}</a></li>
+			{% endfor %}
+		</ul>
 
+		<p>Water Level:<br>{{ trip.waterLevel }}</p>
+		<p>Weather:<br>{{ trip.weather }}</p>
+		<p>Description:<br>{{ trip.general_description }}</p>
+		<p>Problems:<br>{{ trip.problems }}</p>
+		<p>Guest Problems:<br>{{ trip.guest_problems }}</p>
+
+	
 	{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'triplog/base.html' %}
+
+	{% block content %}
+
+		<p>{{ guide.FirstName }} {{ guide.LastName }}</p>
+
+<!-- 		<table>
+			<tr>
+				<th>GUIDE</th>
+				<th>DATE</th>
+				<th>LEADER</th>
+				<th>RIVER</th>
+				<th>TRIP TYPE</th>
+				<th># OF RAFTS</th>
+				<th># OF KAYAKS</th>
+			</tr>
+
+			{% for entry in entryList %}
+
+				<tr>
+					<td><a href="{% url 'single_guide' pk=entry.guide.pk %}">{{ entry.guide }}</a></td>
+					<td><a href="{% url 'single_trip' pk=entry.pk %}">{{ entry.date }}</a></td>
+					<td>{% if entry.guide == entry.leader %} Yes {% endif %}</td>
+					<td>{{ entry.river }}</td>
+					<td>{{ entry.trip_type }}</td>
+					<td>{{ entry.rafts}}</td>
+					<td>{{ entry.kayaks }}</td>
+				</tr>
+
+			{% endfor %}
+
+		</table>
+ -->
+
+		 <table>
+
+		 	{% for entry in entryList %}
+
+		 		{% if last %}
+
+		 			{% if entry.guide = entry.last %}
+		 				<!-- keep going with current guide -->
+		 			{% else %}
+		 				<!-- create new row and start adding up new guide -->
+		 			{% endif %}
+
+		 		{% else %}
+		 			{% last = entry.guide %}
+		 			<!-- reset all variables -->
+		 			<!-- use new guide name as var last and count first entry -->
+
+		 		{% endif %}
+
+		 	{% endfor %}
+
+		 </table>
+	{% endblock %}
+
+
+
+cells:
+	wshdOne = white salmon half day
+	wshdLOne = white salmon half day leader
+	wsfdOne = white salmon full day
+	wsfdLOne = white salmon full day leader
+	wOne = wind
+	wLOne = wind leader
+	kOne = klickitat
+	kLOne = klickitat leader
+	hOne = hood
+	hLOne = hood leader
+	fOne = farmlands
+	fLOne = farmlands leader
+	tOne = tieton
+	tLOne = tieton leader
+
+	wshdTwo = white salmon half day
+	wshdLTwo = white salmon half day leader
+	wsfdTwo = white salmon full day
+	wsfdLTwo = white salmon full day leader
+	wTwo = wind
+	wLTwo = wind leader
+	kTwo = klickitat
+	kLTwo = klickitat leader
+	hTwo = hood
+	hLTwo = hood leader
+	fTwo = farmlands
+	fLTwo = farmlands leader
+	tTwo = tieton
+	tLTwo = tieton leader
+	
+	wshdThreeToFive = white salmon half day
+	wshdLThreeToFive = white salmon half day leader
+	wsfdThreeToFive = white salmon full day
+	wsfdLThreeToFive = white salmon full day leader
+	wThreeToFive = wind
+	wLThreeToFive = wind leader
+	kThreeToFive = klickitat
+	kLThreeToFive = klickitat leader
+	hThreeToFive = hood
+	hLThreeToFive = hood leader
+	fThreeToFive = farmlands
+	fLThreeToFive = farmlands leader
+	tThreeToFive = tieton
+	tLThreeToFive = tieton leader
+
+	wshdSixToSeven = white salmon half day
+	wshdLSixToSeven = white salmon half day leader
+	wsfdSixToSeven = white salmon full day
+	wsfdLSixToSeven = white salmon full day leader
+	wSixToSeven = wind
+	wLSixToSeven = wind leader
+	kSixToSeven = klickitat
+	kLSixToSeven = klickitat leader
+	hSixToSeven = hood
+	hLSixToSeven = hood leader
+	fSixToSeven = farmlands
+	fLSixToSeven = farmlands leader
+	tSixToSeven = tieton
+	tLSixToSeven = tieton leader
+	
+	kc = kayak course
+	kcL = kayak course leader
+
+
+
+
+

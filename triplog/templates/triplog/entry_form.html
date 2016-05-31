@@ -1,9 +1,25 @@
 {% extends 'triplog/base.html' %}
 
 {% block content %}
-    <h1>Creat New Trip Log</h1>
+    <h1>Create New Trip Log</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Create Trip Log</button>
     </form>
+
+
+ <script>
+  $(function() {
+    $( "#id_date" ).datepicker({
+    	changeDay: true,
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "2010:2020",
+      dateFormat: 'yy-mm-dd'
+	    });
+    	  });
+  </script>
+
+  
 {% endblock %}
+

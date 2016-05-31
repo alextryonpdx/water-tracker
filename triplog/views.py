@@ -71,3 +71,13 @@ def SortView(request):
 			# return redirect('sorted_view', S=start,E=end,G=guide)
 	return render(request, 'triplog/sort.html', {'form' : form})
 
+
+
+
+
+
+
+
+
+	
+
